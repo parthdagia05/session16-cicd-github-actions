@@ -1,0 +1,13 @@
+$ docker run -d --name calc-demo -p 5050:5000 calculator:local
+647d7c6d33fe
+$ curl -s 'http://localhost:5050/health'
+{"status":"ok","version":"local"}
+$ curl -s 'http://localhost:5050/'
+{"app":"Session 16 Calculator API","environment":"local","operations":["add","divide","multiply","subtract"],"version":"local"}
+$ curl -s 'http://localhost:5050/calc/add?a=10&b=5'
+{"a":10.0,"b":5.0,"operation":"add","result":15.0}
+$ curl -s 'http://localhost:5050/calc/divide?a=1&b=0'
+{"error":"Cannot divide by zero"}
+$ docker ps --filter name=calc-demo
+NAMES       IMAGE              STATUS                    PORTS
+calc-demo   calculator:local   Up 11 seconds (healthy)   0.0.0.0:5050->5000/tcp, [::]:5050->5000/tcp

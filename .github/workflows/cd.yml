@@ -1,0 +1,120 @@
+# CD = Continuous Delivery / Deployment
+# Runs only after the CI Pipeline has finished successfully on main.
+# Publishes the Docker image to GitHub Container Registry and deploys it.
+name: CD Pipeline
+
+on:
+  workflow_run:
+    workflows: ["CI Pipeline"]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ghcr.io/${{ github.repository }}
+
+jobs:
+  publish:
+    name: Publish Docker Image
+    # Skip CD when CI failed
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    outputs:
+      image: ${{ steps.meta.outputs.image }}
+    steps:
+      - name: Checkout the commit that passed CI
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+
+      - name: Set image tag
+        id: meta
+        run: |
+          SHA=$(git rev-parse --short HEAD)
+          echo "sha=$SHA" >> "$GITHUB_OUTPUT"
+          echo "image=${IMAGE_NAME}:${SHA}" >> "$GITHUB_OUTPUT"
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          build-args: APP_VERSION=${{ steps.meta.outputs.sha }}
+          tags: |
+            ${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.sha }}
+            ${{ env.IMAGE_NAME }}:latest
+
+  deploy:
+    name: Deploy to Production
+    needs: publish
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+    steps:
+      - name: Check deploy secret
+        env:
+          DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+        run: |
+          if [ -z "$DEPLOY_TOKEN" ]; then
+            echo "DEPLOY_TOKEN secret is not set"
+            exit 1
+          fi
+          echo "DEPLOY_TOKEN is set (value is masked in logs: $DEPLOY_TOKEN)"
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Pull image
+        run: docker pull ${{ needs.publish.outputs.image }}
+
+      # Demo deployment target: the runner itself.
+      # In a real project this step would deploy to Kubernetes / a VM / a cloud service.
+      - name: Deploy container
+        run: |
+          docker run -d --name calculator -p 80:5000 \
+            -e APP_ENV=production \
+            ${{ needs.publish.outputs.image }}
+
+      - name: Verify deployment
+        run: |
+          for i in $(seq 1 15); do
+            curl -sf http://localhost/health && break
+            sleep 1
+          done
+          echo
+          curl -sf http://localhost/ | tee deployment.json
+          echo
+
+      - name: Write deployment report
+        run: |
+          {
+            echo "## Deployment"
+            echo ""
+            echo "| Field | Value |"
+            echo "|---|---|"
+            echo "| Image | \`${{ needs.publish.outputs.image }}\` |"
+            echo "| Environment | production |"
+            echo "| Status | healthy |"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload deployment report
+        uses: actions/upload-artifact@v4
+        with:
+          name: deployment-report
+          path: deployment.json

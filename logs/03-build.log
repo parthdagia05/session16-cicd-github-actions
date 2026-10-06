@@ -1,0 +1,16 @@
+$ APP_VERSION=local ./build.sh
+=================================
+Starting Application Build
+=================================
+
+Build files:
+total 32
+drwxr-xr-x@  7 parthdagia  staff   224 Oct  7 03:25 .
+drwxr-xr-x@ 17 parthdagia  staff   544 Oct  7 03:25 ..
+-rw-r--r--@  1 parthdagia  staff   527 Oct  7 03:25 Dockerfile
+drwxr-xr-x@  5 parthdagia  staff   160 Oct  7 03:25 app
+-rw-r--r--@  1 parthdagia  staff   117 Oct  7 03:25 build-info.txt
+-rw-r--r--@  1 parthdagia  staff  1830 Oct  7 03:25 calculator-local.tar.gz
+-rw-r--r--@  1 parthdagia  staff    28 Oct  7 03:25 requirements.txt
+
+Build completed successfully.

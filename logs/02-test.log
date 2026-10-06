@@ -1,0 +1,30 @@
+$ pytest -v --cov=app --cov-report=term
+============================= test session starts ==============================
+platform darwin -- Python 3.14.6, pytest-9.1.1, pluggy-1.6.0 -- /Users/parthdagia/devOps/15_CICD_GitHub_Actions/.venv/bin/python3.14
+rootdir: /Users/parthdagia/devOps/15_CICD_GitHub_Actions
+plugins: cov-7.1.0
+collecting ... collected 11 items
+
+tests/test_api.py::test_index PASSED                                     [  9%]
+tests/test_api.py::test_health PASSED                                    [ 18%]
+tests/test_api.py::test_calc_add PASSED                                  [ 27%]
+tests/test_api.py::test_calc_divide_by_zero PASSED                       [ 36%]
+tests/test_api.py::test_calc_bad_input PASSED                            [ 45%]
+tests/test_api.py::test_calc_unknown_op PASSED                           [ 54%]
+tests/test_calculator.py::test_add PASSED                                [ 63%]
+tests/test_calculator.py::test_subtract PASSED                           [ 72%]
+tests/test_calculator.py::test_multiply PASSED                           [ 81%]
+tests/test_calculator.py::test_divide PASSED                             [ 90%]
+tests/test_calculator.py::test_divide_by_zero PASSED                     [100%]
+
+================================ tests coverage ================================
+_______________ coverage: platform darwin, python 3.14.6-final-0 _______________
+
+Name                Stmts   Miss  Cover
+---------------------------------------
+app/__init__.py         0      0   100%
+app/calculator.py      11      0   100%
+app/main.py            28      1    96%
+---------------------------------------
+TOTAL                  39      1    97%
+============================== 11 passed in 0.18s ==============================

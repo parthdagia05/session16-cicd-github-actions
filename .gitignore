@@ -9,3 +9,4 @@ venv/
 build/
 .DS_Store
 .env
+*.raw

@@ -1,0 +1,12 @@
+▶ Build Docker image
+  #7 [2/6] WORKDIR /app
+  #8 [3/6] COPY requirements.txt .
+  #9 [4/6] RUN pip install --no-cache-dir -r requirements.txt
+  #10 [5/6] COPY app/ app/
+  #11 [6/6] RUN useradd --create-home appuser
+  #12 naming to docker.io/library/calculator:ci done
+▶ Run container
+  14d296f51ce66447362fabb543cb05702155eaccb837e3d4b49aa5c8b21af15e
+▶ Smoke test
+  {"status":"ok","version":"39ba2032460f6ca9b92e85c039c3d37218b906c7"}
+  {"a":10.0,"b":5.0,"operation":"add","result":15.0}

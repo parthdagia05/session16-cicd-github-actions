@@ -1,0 +1,13 @@
+▶ Log in to GitHub Container Registry
+  Logging into ghcr.io...
+  Login Succeeded!
+▶ Build and push image
+  #7 [2/6] WORKDIR /app
+  #8 [3/6] COPY requirements.txt .
+  #9 [4/6] RUN pip install --no-cache-dir -r requirements.txt
+  #10 [5/6] COPY app/ app/
+  #11 [6/6] RUN useradd --create-home appuser
+  #12 naming to ghcr.io/parthdagia05/session16-cicd-github-actions:39ba203 done
+  #12 naming to ghcr.io/parthdagia05/session16-cicd-github-actions:latest done
+  #14 pushing ghcr.io/parthdagia05/session16-cicd-github-actions:39ba203 with docker
+  #15 pushing ghcr.io/parthdagia05/session16-cicd-github-actions:latest with docker

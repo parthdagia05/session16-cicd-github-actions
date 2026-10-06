@@ -1,0 +1,17 @@
+$ gh api repos/parthdagia05/session16-cicd-github-actions/environments --jq ".environments[].name"
+production
+$ gh secret list
+DEPLOY_TOKEN	2026-10-06T21:57:42Z
+$ gh api repos/parthdagia05/session16-cicd-github-actions/deployments --jq ".[] | [.environment, .sha[0:7], .created_at] | @tsv"
+production	39ba203	2026-10-06T22:05:04Z
+production	77567b4	2026-10-06T22:01:20Z
+production	9990b87	2026-10-06T21:59:16Z
+$ gh run list
+completed  success  CD Pipeline  CD Pipeline  main
+completed  success  Fix add()  CI Pipeline  main
+completed  skipped  CD Pipeline  CD Pipeline  main
+completed  failure  Break add() to demo a failing pipeline  CI Pipeline  main
+completed  success  CD Pipeline  CD Pipeline  main
+completed  success  Bump actions to latest major versions  CI Pipeline  main
+completed  success  CD Pipeline  CD Pipeline  main
+completed  success  Add CI/CD demo: calculator API, Dockerfile, CI and CD workflows  CI Pipeline  main

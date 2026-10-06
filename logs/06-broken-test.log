@@ -1,0 +1,16 @@
+$ pytest -q
+E       assert 16.0 == 15
+
+tests/test_api.py:27: AssertionError
+___________________________________ test_add ___________________________________
+
+    def test_add():
+>       assert add(10, 5) == 15
+E       assert 16 == 15
+E        +  where 16 = add(10, 5)
+
+tests/test_calculator.py:7: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_api.py::test_calc_add - assert 16.0 == 15
+FAILED tests/test_calculator.py::test_add - assert 16 == 15
+2 failed, 9 passed in 0.07s

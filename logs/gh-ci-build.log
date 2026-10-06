@@ -1,0 +1,30 @@
+▶ Build application
+  =================================
+  Starting Application Build
+  =================================
+  Build files:
+  total 28
+  drwxr-xr-x 3 runner runner 4096 Oct  6 22:04 .
+  drwxr-xr-x 8 runner runner 4096 Oct  6 22:04 ..
+  -rw-r--r-- 1 runner runner  527 Oct  6 22:04 Dockerfile
+  drwxr-xr-x 2 runner runner 4096 Oct  6 22:04 app
+  -rw-r--r-- 1 runner runner  152 Oct  6 22:04 build-info.txt
+  -rw-r--r-- 1 runner runner 1328 Oct  6 22:04 calculator-39ba2032460f6ca9b92e85c039c3d37218b906c7.tar.gz
+  -rw-r--r-- 1 runner runner   28 Oct  6 22:04 requirements.txt
+  Build completed successfully.
+▶ Show build output
+  Application: Session 16 Calculator API
+  Version:     39ba2032460f6ca9b92e85c039c3d37218b906c7
+  Build Date:  2026-10-06 22:04:01 UTC
+  Build Status: SUCCESS
+▶ Upload build artifact
+  With the provided path, there will be 7 files uploaded
+  Artifact name is valid!
+  Uploading artifact: calculator-build.zip
+  Beginning upload of artifact content to blob storage
+  Finished uploading artifact content to blob storage!
+  SHA256 digest of uploaded artifact is 696d1dc1b6c90736ff6ab4545be39062639dc3d0593a22bb77c632578353189b
+  Finalizing artifact upload
+  Artifact calculator-build successfully finalized. Artifact ID 11447033313
+  Artifact calculator-build has been successfully uploaded! Final size is 3478 bytes. Artifact ID is 11447033313
+  Artifact download URL: https://github.com/parthdagia05/session16-cicd-github-actions/actions/runs/37538080613/artifacts/11447033313

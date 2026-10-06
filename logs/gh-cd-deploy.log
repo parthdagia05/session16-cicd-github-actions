@@ -1,0 +1,26 @@
+▶ Check deploy secret
+  DEPLOY_TOKEN is set (value is masked in logs: ***)
+▶ Log in to GitHub Container Registry
+  Logging into ghcr.io...
+  Login Succeeded!
+▶ Pull image
+  39ba203: Pulling from parthdagia05/session16-cicd-github-actions
+  Digest: sha256:63f1c847712515b80ec9d3bf32b3656b95c6b01a067b64327c3fe90b086d24c4
+  Status: Downloaded newer image for ghcr.io/parthdagia05/session16-cicd-github-actions:39ba203
+  ghcr.io/parthdagia05/session16-cicd-github-actions:39ba203
+▶ Deploy container
+  c6b62b6479dfe756adc63d841f1f97e0a32ede16e4d960c1837fa08c9d987815
+▶ Verify deployment
+  {"status":"ok","version":"39ba203"}
+  {"app":"Session 16 Calculator API","environment":"production","operations":["add","divide","multiply","subtract"],"version":"39ba203"}
+▶ Upload deployment report
+  With the provided path, there will be 1 file uploaded
+  Artifact name is valid!
+  Uploading artifact: deployment-report.zip
+  Beginning upload of artifact content to blob storage
+  Finished uploading artifact content to blob storage!
+  SHA256 digest of uploaded artifact is 787b9f754d684fd4ff6f9124c8aada030eb533e86673464607c654fb8a6245b8
+  Finalizing artifact upload
+  Artifact deployment-report successfully finalized. Artifact ID 11447496253
+  Artifact deployment-report has been successfully uploaded! Final size is 262 bytes. Artifact ID is 11447496253
+  Artifact download URL: https://github.com/parthdagia05/session16-cicd-github-actions/actions/runs/37538225041/artifacts/11447496253

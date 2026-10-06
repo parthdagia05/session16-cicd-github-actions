@@ -337,7 +337,7 @@ CI passed, and CD published `:39ba203` and deployed it.
 
 ## 12. Pipeline execution
 
-All 8 runs on the repo:
+The runs shown in the screenshots (every later push, e.g. adding this README, runs CI and CD again the same way):
 
 | # | Commit | CI Pipeline | CD Pipeline |
 |---|---|---|---|
